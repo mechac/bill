@@ -1,137 +1,157 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Обратный отсчет до 31 марта 2025</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BILL - Timer</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
+        :root {
+            --bg-color: var(--tg-theme-bg-color, #ffffff);
+            --text-color: var(--tg-theme-text-color, #000000);
+            --button-size: 44px;
+        }
+
         body {
             margin: 0;
+            padding: 15px;
+            font-family: -apple-system, system-ui, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #0f0f1a;
-            font-family: 'Arial', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .timer-container {
-            background: linear-gradient(45deg, #1a1a2e, #16213e);
-            padding: 2rem 3rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 2px solid #4e54c8;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .timer-container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent 48%,
-                rgba(78,84,200,0.8) 50%,
-                transparent 52%
-            );
-            animation: moveLines 20s linear infinite;
-            z-index: 0;
-        }
-
-        .timer-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .timer-title {
-            color: #fff;
+        .user-card {
+            padding: 20px;
+            background: var(--tg-theme-secondary-bg-color, #f3f3f3);
+            border-radius: 12px;
+            margin-bottom: 20px;
             text-align: center;
-            font-size: 2em;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            background-size: cover;
+            border: 2px solid var(--tg-theme-button-color, #0088cc);
         }
 
         .timer-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
+            gap: 8px;
+            padding: 10px;
         }
 
-        .time-unit {
-            background: rgba(255,255,255,0.05);
-            padding: 1.5rem;
-            border-radius: 12px;
+        .timer-block {
+            padding: 12px;
+            background: var(--tg-theme-secondary-bg-color, #f3f3f3);
+            border-radius: 8px;
             text-align: center;
-            backdrop-filter: blur(5px);
         }
 
-        .time-value {
-            font-size: 2.5em;
-            color: #8f94fb;
+        .timer-value {
+            font-size: 1.5rem;
             font-weight: bold;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 15px rgba(143,148,251,0.4);
+            color: var(--tg-theme-button-color, #0088cc);
+            margin-bottom: 4px;
         }
 
-        .time-label {
-            color: #fff;
-            font-size: 0.9em;
-            opacity: 0.8;
+        .timer-label {
+            font-size: 0.75rem;
+            color: var(--tg-theme-hint-color, #666666);
             text-transform: uppercase;
         }
 
-        @keyframes moveLines {
-            0% { transform: rotate(0deg) translate(-5%, -5%); }
-            100% { transform: rotate(360deg) translate(5%, 5%); }
+        @media (max-width: 375px) {
+            .timer-value {
+                font-size: 1.2rem;
+            }
+            .timer-label {
+                font-size: 0.65rem;
+            }
         }
 
-        @media (max-width: 768px) {
-            .timer-container {
-                padding: 1.5rem;
-                margin: 1rem;
-            }
-            
-            .timer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 1rem;
-            }
+        .back-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            background: var(--tg-theme-button-color, #0088cc);
+            color: var(--tg-theme-button-text-color, #ffffff);
+            border: none;
+            border-radius: 24px;
+            font-size: 1rem;
+            touch-action: manipulation;
         }
     </style>
 </head>
 <body>
-    <div class="timer-container">
-        <div class="timer-content">
-            <h2 class="timer-title">До 31 марта 2025 осталось:</h2>
-            <div class="timer-grid">
-                <div class="time-unit">
-                    <div class="time-value" id="days">0</div>
-                    <div class="time-label">дней</div>
-                </div>
-                <div class="time-unit">
-                    <div class="time-value" id="hours">0</div>
-                    <div class="time-label">часов</div>
-                </div>
-                <div class="time-unit">
-                    <div class="time-value" id="minutes">0</div>
-                    <div class="time-label">минут</div>
-                </div>
-                <div class="time-unit">
-                    <div class="time-value" id="seconds">0</div>
-                    <div class="time-label">секунд</div>
-                </div>
-            </div>
+    <div class="user-card">
+        <div class="user-avatar" id="userAvatar"></div>
+        <h2 id="userName">Загрузка...</h2>
+        <p id="userInfo"></p>
+    </div>
+
+    <div class="timer-grid">
+        <div class="timer-block">
+            <div class="timer-value" id="days">0</div>
+            <div class="timer-label">дней</div>
+        </div>
+        <div class="timer-block">
+            <div class="timer-value" id="hours">0</div>
+            <div class="timer-label">часов</div>
+        </div>
+        <div class="timer-block">
+            <div class="timer-value" id="minutes">0</div>
+            <div class="timer-label">минут</div>
+        </div>
+        <div class="timer-block">
+            <div class="timer-value" id="seconds">0</div>
+            <div class="timer-label">секунд</div>
         </div>
     </div>
 
-    <script>
-        const targetDate = new Date('2025-03-31T00:00:00').getTime();
+    <button class="back-button" id="backButton">Назад</button>
 
+    <script>
+        // Инициализация Telegram WebApp
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+        tg.BackButton.show();
+
+        // Элементы интерфейса
+        const userAvatar = document.getElementById('userAvatar');
+        const userName = document.getElementById('userName');
+        const userInfo = document.getElementById('userInfo');
+        const backButton = document.getElementById('backButton');
+
+        // Загрузка данных пользователя
+        function loadUserData() {
+            const user = tg.initDataUnsafe.user || {};
+            
+            if(user.photo_url) {
+                userAvatar.style.backgroundImage = `url(${user.photo_url})`;
+            }
+            
+            userName.textContent = [user.first_name, user.last_name]
+                .filter(Boolean).join(' ') || 'Гость';
+            
+            const infoParts = [];
+            if(user.username) infoParts.push(`@${user.username}`);
+            if(user.id) infoParts.push(`ID: ${user.id}`);
+            userInfo.textContent = infoParts.join(' • ') || 'Не авторизован';
+        }
+
+        // Таймер
+        const targetDate = new Date('2025-03-31T00:00:00').getTime();
+        
         function updateTimer() {
-            const now = new Date().getTime();
+            const now = Date.now();
             const diff = targetDate - now;
 
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -147,7 +167,22 @@
             requestAnimationFrame(updateTimer);
         }
 
+        // Обработчики событий
+        backButton.addEventListener('click', () => tg.close());
+        backButton.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            backButton.classList.add('pressed');
+        });
+        backButton.addEventListener('touchend', () => {
+            backButton.classList.remove('pressed');
+        });
+
+        // Инициализация
+        loadUserData();
         updateTimer();
+
+        // Оптимизация для мобильных устройств
+        document.body.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
     </script>
 </body>
 </html>
