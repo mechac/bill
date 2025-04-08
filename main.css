@@ -1,0 +1,371 @@
+body {
+	margin: 0;
+	background-color: black;
+	height: 100vh;
+	background-size: cover;
+	font-family: "Inter", sans-serif;
+}
+
+.container {
+	margin: 0px 35px;
+}
+
+.video-shap {
+	height: 650px;
+	background-image: url(img/screenbill.svg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.header-line{
+	padding-top: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.nav-item {
+	color: #fff;
+	text-decoration: none;
+	margin-right: 25px;
+}
+
+.nav-item i {
+  width: 50px;
+  height: 50px;
+  font-size: 3rem; /* Размер для Font Awesome */
+}
+
+.nav-item:hover {
+    transform: scale(1.5);
+}
+
+.textlogo{
+	color: #fff;
+	margin-left: 50px;
+}
+
+.text-info {
+    color: #fff;
+    padding: 50px 0;
+}
+
+.text-info .container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+
+/* Обновлённые стили */
+.season-box {
+    background: white;
+    color: black;
+    border-radius: 50px; /* Закругление углов */
+    padding: 15px 40px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px; /* Минимальная ширина */
+    height: 50px; /* Фиксированная высота */
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin: 20px 60px;
+}
+
+.first{
+    margin: 30px 60px;
+    text-align: center;
+    color: #fff;
+    font-size: 3rem;
+    color: ;
+
+}
+
+.second{
+    margin: 30px 100px;
+    text-align: center;
+    color: #fff;
+    font-size: 3rem;
+}
+/* Стили для инструкции */
+.instruction {
+    color: #fff;
+    padding: px 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.instruction-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.conditions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.condition-item {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    padding-left: 30px;
+    position: relative;
+    line-height: 1.4;
+}
+
+.condition-item::before {
+    content: "•";
+    color: #fff;
+    font-size: 2rem;
+    position: absolute;
+    left: 0;
+    top: -2px;
+}
+
+.hashtag {
+    color: #00ff88;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(0,255,136,0.3);
+}
+
+/* Стили возможностей */
+.opportunities {
+    color: #fff;
+    padding: 40px 35px;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.token-type {
+    color: #00ff88;
+    font-size: 1.8rem;
+    margin: 25px 0 15px;
+    letter-spacing: 1px;
+}
+
+.token-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0 20px;
+}
+
+.token-features li {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    position: relative;
+    padding-left: 25px;
+}
+
+.token-features li::before {
+    content: "▹";
+    color: #00ff88;
+    position: absolute;
+    left: 0;
+}
+
+/* Стили для секции с инвайтом */
+.invite-section {
+    padding: 40px 35px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.invite-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.invite-btn {
+    background: #00ff88;
+    color: #000;
+    padding: 15px 40px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(0,255,136,0.3);
+}
+
+.invite-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,255,136,0.4);
+}
+
+.input-field {
+    flex-grow: 1;
+    padding: 15px 25px;
+    border: 2px solid #00ff88;
+    border-radius: 12px;
+    background: transparent;
+    color: #fff;
+    font-size: 1.1rem;
+    outline: none;
+}
+
+.input-field::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+
+.invite-btn i {
+    margin-right: 12px;
+    font-size: 1.4em;
+}
+
+/* для trialgl */
+
+.triagl{
+    text-align: center;
+}
+
+/* Мобильная версия (если нужно переопределить) */
+@media (max-width: 768px) {
+    .desktop-notify {
+        left: 20px !important;
+        bottom: 20px !important;
+        padding: 15px 25px !important;
+        font-size: 1rem !important;
+    }
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+    .season-box {
+        width: 100%; /* На всю ширину */
+        max-width: 300px;
+        height: 60px; /* Увеличенная высота */
+        font-size: 1.4rem;
+        border-radius: 18px; /* Большее закругление */
+        padding: 20px 50px;
+    }
+    
+    .season-button {
+        padding: 0 15px; /* Отступы по бокам */
+    }
+    .instruction {
+        padding: 30px 20px;
+    }
+    
+    .instruction-title {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+    
+    .condition-item {
+        font-size: 1.2rem;
+        padding-left: 25px;
+    }
+    
+    .condition-item::before {
+        font-size: 1.5rem;
+        top: -1px;
+    }
+    
+    .hashtag {
+        font-size: 1.1rem;
+    }
+    .second {
+        margin: 10px 100px;
+    }
+    .opportunities {
+        padding: 30px 20px;
+    }
+    
+    .section-title {
+        text-align: center;
+        font-size: 1.8rem;
+    }
+    
+    .token-type {
+        font-size: 1.4rem;
+    }
+    
+    .token-features li {
+        font-size: 1.1rem;
+        padding-left: 20px;
+    }
+    .invite-container {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .invite-btn {
+        width: 100%;
+        text-align: center;
+        padding: 15px 20px;
+    }
+    
+    .input-field {
+        width: 100%;
+        padding: 12px 20px;
+         .invite-section {
+        padding: 30px 20px;
+    }
+    
+    .invite-container {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+    }
+    
+    .invite-btn {
+        width: 100%;
+        padding: 18px 25px; /* Увеличено на 20% */
+        font-size: 1.3rem; /* Больший размер текста */
+        border-radius: 10px;
+        order: 1; /* Кнопка сверху */
+    }
+    
+    .input-field {
+        width: 100%;
+        padding: 18px 25px; /* Увеличено на 25% */
+        font-size: 1.2rem; /* Больший размер текста */
+        border-width: 3px; /* Более толстая рамка */
+        order: 2; /* Поле ввода снизу */
+    }
+    
+    .input-field::placeholder {
+        font-size: 1.1rem; /* Увеличенный плейсхолдер */
+        opacity: 0.9; /* Более четкий текст */
+    }
+    #shareButton {
+        padding: 20px 30px !important;
+        font-size: 1.4rem !important;
+    }
+    
+    /* Усилим анимацию для мобилок */
+    @keyframes slideIn {
+        from { bottom: -70px; }
+        to { bottom: 30px; }
+    }
+}
+
+/* Ховер-эффект при необходимости */
+.season-box:hover {
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+.invite-btn:active {
+    transform: scale(0.97);
+    transition: all 0.2s ease;
+}
+
+.input-field:focus {
+    background: rgba(255,255,255,0.05);
+    box-shadow: 0 0 15px rgba(0,255,136,0.2);
+}
