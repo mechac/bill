@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Обработчик кнопки "Пригласить"
     shareButton.addEventListener('click', () => {
-        const inviteLink = 'https://t.me/BILLTOKEN_Official';
+        const inviteLink = 'https://t.me/billtokencrypto';
         
         if (navigator.share) {
             navigator.share({
